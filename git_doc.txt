@@ -1,5 +1,5 @@
 教程：https://zhuanlan.zhihu.com/p/30044692
-
+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
 注：
 找套接字删除：
 git config -l --show-origin
@@ -14,7 +14,7 @@ $ git update-git-for-windows
 
 git config --global credential.helper store
 cat ~/.gitconfig
-
+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
 #清除密码缓存
 git config --local --unset credential.helper
 git config --global --unset credential.helper
