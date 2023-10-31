@@ -1,6 +1,5 @@
 教程：https://zhuanlan.zhihu.com/p/30044692
 
-
 git config --system credential.helper
 manager
 1.使用mange保存凭证：
