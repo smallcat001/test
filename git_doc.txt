@@ -1,6 +1,5 @@
 教程：https://zhuanlan.zhihu.com/p/30044692
 
-
 git config --system credential.helper
 manager
 1.使用mange保存凭证：
@@ -73,8 +72,32 @@ $git ls-files	查看所有文件
 $cat 文件名。	查看文件内容
 
 
+标签：
+基本操作
+标签的作用可以简单理解为给版本起名字
 
+查看所有标签
+git tag
 
+把当前分支的最新提交打上标签，标签名字自己起
+git tag 标签名
+
+把某个版本号的提交打上标签
+git tag 标签名 对应commit版本号
+
+可以用这种方式给标签增加说明，-a对应标签名，-m对应描述信息
+git tag -a v0.1 -m “描述信息” 版本号
+
+查看标签具体信息
+git show 标签名
+删除标签
+git tag -d 标签名
+推送标签
+推送某个标签到远程
+git push origin 标签名
+
+推送所有标签到远程
+git push origin --tags
 
 会显示本地分支与远程仓库分支之间的差异，它仅会显示那些在远程仓库中有但在本地仓库中没有的提交。这可以帮助我们了解远程仓库的变动情况，并决定是否需要合并这些变动到本地仓库中
 git log HEAD..origin/master
