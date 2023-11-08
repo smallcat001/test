@@ -1,0 +1,230 @@
+教程：https://zhuanlan.zhihu.com/p/30044692
+我的仓库：
+https://github.com/smallcat001/use_doc.git
+查看仓库有无更新
+git remote show origin如有更新使用：git pull origin拉取
+
+git config --system credential.helper
+manager
+1.使用mange保存凭证：
+若安装Git时安装了GitGUI，自动会在system级别中设置credential.helper为manager。
+
+git-credential-manager.exe和 git-credential-wincred.exe 都是将凭据存储在系统的凭据管理器中，只不过前者是有图形界面，后者没有图形界面，需要在命令行中输入密码.
+使用场合：
+你的账号密码是在弹窗中输入的，例如下面的这样。使用的就是manager来进行凭据管理的
+在控制面板->用户账户->凭据管理器，可以看到对应的git账号凭据管理，可以修改或者删除。
+删除后，再次pull或者push，会重新输入密码
+2.使用store保存凭证：
+使用：git config --global credential.helper store 
+会在在C:/user/用户名 目录下的.gitconfig文件添加以下内容：
+[credential]
+	helper = store
+输入账号和密码，push或者pull后，此时查看C:/user/用户名 会自动生成.git-credentials 文件，里面明文保存了你的账号和密码。
+3.使用cache保存凭证：
+将凭证存放在内存中一段时间。 密码永远不会被存储在磁盘中，并且默认在15分钟后从内存中清除。
+git config --global credential.helper cache
+如果想自己设置时间，可以这样做：
+git config credential.helper 'cache --timeout=3600'
+密码将保存在内存中1小时
+
+
+注：
+找套接字删除：
+git config -l --show-origin
+
+输入命令：git update-git-for-windows，对git进行更新。
+$ git update-git-for-windows
+
+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
+#清除密码缓存
+git config --local --unset credential.helper
+git config --global --unset credential.helper
+git config --system --unset credential.helper
+#配置为缓存密码不需要每次都输入密码
+git config --global credential.helper store
+cat ~/.gitconfig
+git config --global credential.helper 'cache --timeout=360000'
+pwd/查看当前目录
+git diff /查看修改的内容
+ git checkout -- 要修改的文件//撤销修改
+cat file_name/查看文件信息
+$ git log/查看版本信息：
+$ git log --pretty=oneline /查看单行版本信息
+$ git log --graph --pretty=oneline --abbrev-commit
+
+git config --list	//查看git设置情况
+
+设置全局仓库的用户名：
+git config --global user.name "userName"  //你的用户名
+git config --global user.email "email address" //你的邮箱地址
+
+
+git reset --hard 版本号/git reset --hard HEAD^/git reset --hard HEAD~n/版本回退
+git reflog/获取版本号
+$git ls-files	查看所有文件
+$cat 文件名。	查看文件内容
+
+
+标签：
+基本操作
+标签的作用可以简单理解为给版本起名字
+
+查看所有标签
+git tag
+
+把当前分支的最新提交打上标签，标签名字自己起
+git tag 标签名
+
+把某个版本号的提交打上标签
+git tag 标签名 对应commit版本号
+
+可以用这种方式给标签增加说明，-a对应标签名，-m对应描述信息
+git tag -a v0.1 -m “描述信息” 版本号
+
+查看标签具体信息
+git show 标签名
+删除标签
+git tag -d 标签名
+推送标签
+推送某个标签到远程
+git push origin ：标签名
+推送所有标签到远程
+git push origin --tags
+删除远程节点：
+git push -d origin V1.0
+
+会显示本地分支与远程仓库分支之间的差异，它仅会显示那些在远程仓库中有但在本地仓库中没有的提交。这可以帮助我们了解远程仓库的变动情况，并决定是否需要合并这些变动到本地仓库中
+git log HEAD..origin/master
+会显示本地分支与远程仓库分支之间的差异，它仅会显示那些在远程仓库中有但在本地仓库中没有的提交。这可以帮助我们了解远程仓库的变动情况，并决定是否需要合并这些变动到本地仓库中
+git log origin/master..HEAD
+六：创建与合并分支
+$ git checkout -b dev 创建与跳转分支
+git checkout 命令加上 –b参数表示创建并切换，相当于如下2条命令
+git branch dev	创建
+git checkout dev	切换
+
+$git branch -d dev	del分支dev
+
+$git branch		查看当前分支
+
+$git stash		隐藏分支
+$git stash list	查看下工作现场去了哪里
+$git stash apply	恢复工作现场但并不删除stash，需使用git stash stop删除
+$git stash pop	恢复工作现场同时删除stash
+$git show-ref	显示所有结点
+现在我们可以把dev分支上的内容合并到分支master上了，可以在master分支上，
+使用如下命令 git merge dev
+
+5提交代码成功
+合并dev分支，使用命令 git merge -–no-ff -m “注释” dev
+git rebase --continue 解决冲突
+git merge origin/dev 可以远程将dev分支同步到本地分支
+一、多人协作：
+$git remote 查看远程库
+$git remote -v 查看远程库详细信息
+
+关联仓库
+git remote add origin https://github.com/tugenhua0707/testgit.git 
+git branch -M master/main
+
+把本地仓库分支master内容推送到元仓库
+$ git push -u origin master ，简化：$git push origin master
+克隆远程库：
+$git clone https://github.com/smallcat001/test.git
+git config --global http.sslverify false 解决克隆不了问题
+浅克隆：
+git pull --depth=1 origin master	
+克隆分支：
+git clone --branch <branchname> <remote-repo-url>
+把远程的origin的dev分支到本地来：
+git branch --set-upstream
+
+# 推送所有分支到远程仓库
+$ git push [remote] --all
+
+创建远程分支到本地进行开发
+git checkout -b dev origin/fenzhi1
+
+由上面可知：推送失败，因为我的小伙伴最新提交的和我试图推送的有冲突，解决的办法也很简单，上面已经提示我们，先用git pull把最新的提交从origin/dev抓下来，然后在本地合并，解决冲突，再推送
+
+查看远程仓库地址：
+git remote get-url origin 
+更改remote节点地址：
+方法1.修改命令
+git remote set-url origin <url>
+方法2.先删后加
+git remote rm origin
+git remote add origin [url]
+
+
+ 方法一
+先新建一个名为latest_branch的分支，然后将当前master分支中的所有文件添加到latest_branch分支中，接着等待移动完毕后删除master分支，最后把latest_branch这个分支的分支名改为master。
+以下是具体实现：
+
+git checkout --orphan latest_branch/2.1. 切换到latest_branch分支下
+git add -A/2.2. 添加所有文件
+git commit -am "清除所有历史版本以减少仓库大小，请重新从远程拷贝此仓库"/2.3. 提交更改
+git branch -D master/2.4. 删除分支
+git branch -m master/2.5. 将当前分支重命名
+git push -f origin master/2.6. 最后，强制更新存储库，-f为强制推送
+2.7. 技巧
+将如下代码保存在一个bat文件里，然后双击运行即可。
+git checkout --orphan latest_branch
+git add -A
+git commit -am "清除所有历史版本以减少仓库大小，请重新从远程拷贝此仓库"
+git branch -D master
+git branch -m master
+git push -f origin master
+————————————————
+版权声明：本文为CSDN博主「COCO56（徐可可）」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/COCO56/article/details/95109142
+
+空分支使用技巧：
+git checkout --orphan branch_name # 新建空分支img
+git status
+git rm -rf .		/# 删除所有文件img
+git status
+初始化空分支
+如果空分支没有任何文件被提交的话，使用git branch是看不到空分支的，我创建一个README.md
+git branch -a	# 未提交孤立分支前
+git add .		# 添加文件（README.md）到暂存区
+git commit -m "Initial commit"
+git branch -a
+
+git push origin branch_name 	#提交到远程分支
+
+
+以过时不用：
+下载某一个文件夹解决方案：
+1.先创建一个空目录
+mkdir -p /use/dir
+1
+2.进入创建的目录
+cd /use/dir
+1
+3. 执行git init 初始化git
+git init
+1
+4. 和远程git 库进行关联
+git remote add -f origin git@git.xxx.com:xxx/xxx.git
+5.开启稀疏检出：
+git config core.sparsecheckout true
+6. “clone_file" 文件里写入要拉取的文件或者文件夹
+echo "clone_file" >> .git/info/sparse-checkout
+7. 进行git checkout 指定分支
+git checkout master
+
+
+查看有无http和https代理：
+git config --global --get http.proxy
+git config --global --get https.proxy
+取消http和https代理：
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+打不开github官网解决方案：不太行
+1.打开网站 http://tool.chinaz.com/dns/，在A类型中填写github.com,再点击监测按钮
+2.复制下面任意一个ip
+3.打开电脑文件C:\Windows\System32\drivers\etc下的host文件
+4.在host文件的最后一刚加入刚才复制的IP
+	#20.205.243.166         github.com
+5. win+R 打开cmd 命窗口，执行命令ipconfig/flushdns
