@@ -4,6 +4,22 @@ https://github.com/smallcat001/use_doc.git
 查看仓库有无更新
 git remote show origin如有更新使用：git pull origin拉取
 
+一、下载远程库最新更新方法：
+方法一、
+使用如下命令可以在本地新建一个temp分支，并将远程origin仓库的master分支代码下载到本地temp分支
+$ git fetch origin master:temp
+使用如下命令来比较本地代码与刚刚从远程下载下来的代码的区别
+$ git diff temp
+合并temp分支到本地的master分支
+$ git merge temp
+删除temp分支
+如果temp分支不想要保留，可以使用如下命令删除该分支：
+方法二、
+git pull的作用是，从远程库中获取某个分支的更新，再与本地指定的分支进行自动merge。完整格式是：
+$ git pull <远程库名> <远程分支名>:<本地分支名>
+
+
+
 使用GitHub的时候，手欠在网页上修改了readme，然后今天在本地更新readme的时候又忘记了git pull先，然后就出现了merge conflict了，提示both modified
 调出合并工具：git mergetool 
 
@@ -66,7 +82,7 @@ git reset --hard 版本号/git reset --hard HEAD^/git reset --hard HEAD~n/版本
 git reflog/获取版本号
 $git ls-files	查看所有文件
 $cat 文件名。	查看文件内容
-
+https://gsmallcat001:980817yl@gitee.com
 
 标签：
 基本操作
