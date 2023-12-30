@@ -4,6 +4,15 @@ https://github.com/smallcat001/use_doc.git
 查看仓库有无更新
 git remote show origin如有更新使用：git pull origin拉取
 
+
+解决文件查出限制的方法：
+查看具体文件名：
+$ git rev-list --objects --all | grep xxx
+从chane中删除：
+$ git filter-branch --tree-filter 'rm -f xxx' --tag-name-filter cat -- --all
+再推送：
+$ git push origin master -f 
+
 一、下载远程库最新更新方法：
 方法一、
 使用如下命令可以在本地新建一个temp分支，并将远程origin仓库的master分支代码下载到本地temp分支
