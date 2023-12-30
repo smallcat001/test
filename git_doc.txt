@@ -11,7 +11,7 @@ $ git rev-list --objects --all | grep xxx
 从chane中删除：
 $ git filter-branch --tree-filter 'rm -f xxx' --tag-name-filter cat -- --all
 再推送：
-$ git push origin master -f 
+$ git push origin master -
 
 一、下载远程库最新更新方法：
 方法一、
